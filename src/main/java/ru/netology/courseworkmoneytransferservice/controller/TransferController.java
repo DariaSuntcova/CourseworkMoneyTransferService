@@ -1,6 +1,9 @@
 package ru.netology.courseworkmoneytransferservice.controller;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import ru.netology.courseworkmoneytransferservice.model.ConfirmOperation;
 import ru.netology.courseworkmoneytransferservice.model.Transaction;
 import ru.netology.courseworkmoneytransferservice.service.TransferService;
@@ -20,8 +23,9 @@ public class TransferController {
     }
 
     @PostMapping("/confirmOperation")
-    public String confirmOperation(@RequestBody ConfirmOperation operation){
+    public String confirmOperation(@RequestBody ConfirmOperation operation) {
         return transferService.confirmOperation(operation);
     }
+
 
 }

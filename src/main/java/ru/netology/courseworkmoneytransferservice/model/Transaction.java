@@ -3,24 +3,19 @@ package ru.netology.courseworkmoneytransferservice.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Getter
 public class Transaction {
-    private final SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
-    @Getter
     private final String cardFromCVV;
-    @Getter
     private final String cardFromNumber;
-    @Getter
     private final String cardFromValidTill;
-    @Getter
     private final String cardToNumber;
-    @Getter
     private final Amount amount;
-    @Getter
+
     private final Date date;
-    @Getter
+
+    private final double commission;
     @Setter
     private TransactionState state;
 
@@ -31,16 +26,16 @@ public class Transaction {
         this.cardToNumber = cardToNumber;
         this.amount = amount;
         date = new Date();
-        state = TransactionState.LOAD;
+        commission = amount.value() / 100;
     }
 
     @Override
     public String toString() {
-        return "Transaction{" +
+        return "new Transaction{" +
                 "cardFromNumber='" + cardFromNumber + '\'' +
                 ", cardToNumber='" + cardToNumber + '\'' +
                 ", amount=" + amount +
-                ", date=" + date +
+                ", commission=" + commission +
                 ", state=" + state +
                 '}';
     }

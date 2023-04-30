@@ -8,8 +8,8 @@ Content-Type: application/json;charset=UTF-8
  "cardFromCVV": "456",
  "cardFromValidTill": "01/25",
  "amount": {
-  "currency": "RUB",
-  "value": 15000
+   "currency": "RUB",
+   "value": 15000
 }
 }
 
