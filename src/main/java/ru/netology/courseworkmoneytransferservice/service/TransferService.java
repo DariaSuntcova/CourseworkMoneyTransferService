@@ -29,7 +29,7 @@ public class TransferService {
     public String confirmOperation(ConfirmOperation operation) {
         validation(operation);
         Transaction transaction;
-        if (operation.code().equals("OK")) {
+        if (operation.code().equals("0000")) {
             transaction = transferRepository.confirmOperation(operation.operationId());
         } else {
             transaction = transferRepository.errorConfirmOperation(operation.operationId());
@@ -64,11 +64,11 @@ public class TransferService {
             flag = false;
             stringBuilder.append("Invalid CardFromCVV ");
         }
-        if (transaction.getAmount().currency() == null) {
+        if (transaction.getAmount().getCurrency() == null) {
             flag = false;
             stringBuilder.append("Invalid Currency ");
         }
-        if (transaction.getAmount().value() == 0) {
+        if (transaction.getAmount().getValue() == 0) {
             flag = false;
             stringBuilder.append("Invalid Amount ");
         }

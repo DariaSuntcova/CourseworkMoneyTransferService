@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.Objects;
 
 @Getter
 public class Transaction {
@@ -26,7 +27,20 @@ public class Transaction {
         this.cardToNumber = cardToNumber;
         this.amount = amount;
         date = new Date();
-        commission = amount.value() / 100;
+        commission = amount.getValue() / 100;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Transaction that = (Transaction) o;
+        return Double.compare(that.commission, commission) == 0 && Objects.equals(cardFromCVV, that.cardFromCVV) && Objects.equals(cardFromNumber, that.cardFromNumber) && Objects.equals(cardFromValidTill, that.cardFromValidTill) && Objects.equals(cardToNumber, that.cardToNumber) && Objects.equals(amount, that.amount) && Objects.equals(date, that.date) && state == that.state;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cardFromCVV, cardFromNumber, cardFromValidTill, cardToNumber, amount, date, commission, state);
     }
 
     @Override
