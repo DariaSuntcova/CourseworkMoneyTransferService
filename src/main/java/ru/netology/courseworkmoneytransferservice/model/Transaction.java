@@ -27,7 +27,7 @@ public class Transaction {
         this.cardToNumber = cardToNumber;
         this.amount = amount;
         date = new Date();
-        commission = amount.getValue() / 100;
+        commission = amount.value() / 100;
     }
 
     @Override

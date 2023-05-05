@@ -12,6 +12,7 @@ import ru.netology.courseworkmoneytransferservice.exception.ErrorTransferOrConfi
 import ru.netology.courseworkmoneytransferservice.exception.InvalidDataException;
 import ru.netology.courseworkmoneytransferservice.model.Amount;
 import ru.netology.courseworkmoneytransferservice.model.ConfirmOperation;
+import ru.netology.courseworkmoneytransferservice.model.OperationResponse;
 import ru.netology.courseworkmoneytransferservice.model.Transaction;
 import ru.netology.courseworkmoneytransferservice.repository.TransferRepository;
 import ru.netology.courseworkmoneytransferservice.service.TransferService;
@@ -40,7 +41,7 @@ public class TransferServiceTest {
     @Test
     public void transferValidationTest() {
         when(repository.addTransfer(transaction)).thenReturn("1");
-        Assertions.assertEquals("1", service.transfer(transaction));
+        Assertions.assertEquals(new OperationResponse("1"), service.transfer(transaction));
     }
 
     @ParameterizedTest
@@ -52,7 +53,7 @@ public class TransferServiceTest {
     @Test
     public void confirmOperationTest() {
         when(repository.confirmOperation("1")).thenReturn(transaction);
-        Assertions.assertEquals("1", service.confirmOperation(operation));
+        Assertions.assertEquals(new OperationResponse("1"), service.confirmOperation(operation));
     }
 
     @ParameterizedTest

@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import ru.netology.courseworkmoneytransferservice.controller.TransferController;
 import ru.netology.courseworkmoneytransferservice.model.Amount;
 import ru.netology.courseworkmoneytransferservice.model.ConfirmOperation;
+import ru.netology.courseworkmoneytransferservice.model.OperationResponse;
 import ru.netology.courseworkmoneytransferservice.model.Transaction;
 import ru.netology.courseworkmoneytransferservice.service.TransferService;
 
@@ -33,13 +34,13 @@ public class TransferControllerTest {
 
     @Test
     public void transferTest() {
-        when(service.transfer(transaction)).thenReturn("1");
-        Assertions.assertEquals("1", controller.transfer(transaction));
+        when(service.transfer(transaction)).thenReturn(new OperationResponse("1"));
+        Assertions.assertEquals(new OperationResponse("1"), controller.transfer(transaction));
     }
 
     @Test
     public void confirmOperationTest() {
-        when(service.confirmOperation(operation)).thenReturn("1");
-        Assertions.assertEquals("1", controller.confirmOperation(operation));
+        when(service.confirmOperation(operation)).thenReturn(new OperationResponse("1"));
+        Assertions.assertEquals(new OperationResponse("1"), controller.confirmOperation(operation));
     }
 }
