@@ -21,6 +21,7 @@ public class TransferRepository {
     public String addTransfer(Transaction transaction) {
         String transactionId = id.getAndIncrement() + "";
         transferMap.put(transactionId, transaction);
+        transaction.setState(TransactionState.LOAD);
         return transactionId;
     }
 

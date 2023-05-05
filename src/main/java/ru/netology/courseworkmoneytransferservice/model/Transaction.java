@@ -3,24 +3,20 @@ package ru.netology.courseworkmoneytransferservice.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
+@Getter
 public class Transaction {
-    private final SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
-    @Getter
     private final String cardFromCVV;
-    @Getter
     private final String cardFromNumber;
-    @Getter
     private final String cardFromValidTill;
-    @Getter
     private final String cardToNumber;
-    @Getter
     private final Amount amount;
-    @Getter
+
     private final Date date;
-    @Getter
+
+    private final double commission;
     @Setter
     private TransactionState state;
 
@@ -31,16 +27,29 @@ public class Transaction {
         this.cardToNumber = cardToNumber;
         this.amount = amount;
         date = new Date();
-        state = TransactionState.LOAD;
+        commission = amount.value() / 100;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Transaction that = (Transaction) o;
+        return Double.compare(that.commission, commission) == 0 && Objects.equals(cardFromCVV, that.cardFromCVV) && Objects.equals(cardFromNumber, that.cardFromNumber) && Objects.equals(cardFromValidTill, that.cardFromValidTill) && Objects.equals(cardToNumber, that.cardToNumber) && Objects.equals(amount, that.amount) && Objects.equals(date, that.date) && state == that.state;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cardFromCVV, cardFromNumber, cardFromValidTill, cardToNumber, amount, date, commission, state);
     }
 
     @Override
     public String toString() {
-        return "Transaction{" +
+        return "new Transaction{" +
                 "cardFromNumber='" + cardFromNumber + '\'' +
                 ", cardToNumber='" + cardToNumber + '\'' +
                 ", amount=" + amount +
-                ", date=" + date +
+                ", commission=" + commission +
                 ", state=" + state +
                 '}';
     }

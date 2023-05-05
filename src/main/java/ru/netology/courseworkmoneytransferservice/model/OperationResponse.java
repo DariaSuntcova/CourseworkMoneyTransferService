@@ -1,5 +1,4 @@
 package ru.netology.courseworkmoneytransferservice.model;
 
-public enum Currency {
-    RUR, EUR, USD
+public record OperationResponse(String operationId) {
 }
